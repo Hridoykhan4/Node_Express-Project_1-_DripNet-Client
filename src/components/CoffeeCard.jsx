@@ -39,7 +39,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   };
 
   return (
-    <div className=" rounded-xl shadow-md p-5 flex flex-col md:flex-row items-center gap-6  mx-auto">
+    <div className=" rounded-xl shadow-md p-5 flex flex-col md:flex-row items-center gap-6 ">
       {/* Image */}
       <img
         src={photo}
