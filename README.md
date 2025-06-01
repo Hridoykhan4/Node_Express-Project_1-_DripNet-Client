@@ -1,12 +1,33 @@
-# React + Vite
+# ☕ DripNet Cafe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site:** [dripnet-cafe.web.app](https://dripnet-cafe.web.app/)
 
-Currently, two official plugins are available:
+Welcome to **DripNet Cafe**, a sleek and responsive web application for managing premium coffee collections. Built with modern tools and clean UI, this app offers a delightful user experience and developer-friendly architecture.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🌐 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend:** React, Tailwind CSS, DaisyUI
+- **Routing:** React Router DOM
+- **State & Data:** useState, useEffect, useLoaderData
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB (CRUD operations)
+- **Deployment:** Firebase (Frontend) + Vercel (Backend)
+
+---
+
+## 🚀 Features
+
+- 🔐 **User Authentication** (Sign In & Sign Up)
+- ➕ **Add New Coffee**: Submit new coffee items to the database
+- 📝 **Update Coffee**: Edit existing coffee details
+- 🗑️ **Delete Coffee**: Remove coffee items
+- 👀 **View Orders**: Track who ordered which coffee
+- 💌 **Newsletter**: Collect email subscriptions
+- 🌙 **Dark/Light Theme Support** (based on OS preference)
+
+---
+
+## 📁 Folder Structure
+
