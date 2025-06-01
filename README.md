@@ -29,5 +29,3 @@ Welcome to **DripNet Cafe**, a sleek and responsive web application for managing
 
 ---
 
-## 📁 Folder Structure
-
