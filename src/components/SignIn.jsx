@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Mail, Lock, User } from "lucide-react";
 import useAuthValue from "../hooks/useAuthValue";
 
 const SignIn = () => {
   const { signInUser } = useAuthValue();
+  const nav = useNavigate();
+  const {state} = useLocation()
   const handleSignIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -24,6 +26,7 @@ const SignIn = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log("After update patch: ", data);
+            nav(state ? state : '/')
           });
       })
       .catch((err) => {

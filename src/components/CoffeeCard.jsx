@@ -1,10 +1,11 @@
 import { EyeIcon, Pencil, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAuthValue from "../hooks/useAuthValue";
 
 const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const { name, quantity, taste, photo, _id } = coffee || {};
-
+  const { user } = useAuthValue();
   const handleDeleteCoffee = (coffeeId, coffeeName) => {
     Swal.fire({
       title: "Are you sure?",
@@ -21,11 +22,8 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data.deletedCount > 0) {
-              const remaining = [...coffees].filter(
-                (coffee) => coffee._id !== coffeeId
-              );
+              const remaining = coffees.filter((c) => c._id !== coffeeId);
               setCoffees(remaining);
               Swal.fire({
                 title: "Deleted!",
@@ -39,8 +37,9 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   };
 
   return (
-    <div className=" rounded-xl shadow-md p-5 flex flex-col md:flex-row items-center gap-6 ">
+    <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-xl shadow-md hover:shadow-lg transition-shadow p-5 flex flex-col md:flex-row items-center gap-6">
       {/* Image */}
+
       <img
         src={photo}
         alt={name}
@@ -48,35 +47,47 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       />
 
       {/* Content */}
-      <div className="flex-1 space-y-2 ">
+      <div className="flex-1 space-y-2">
         <p>
-          <span className="font-semibold">Name :</span> {name}
+          <span className="font-semibold">Name:</span> {name}
         </p>
         <p>
-          <span className="font-semibold">Quantity :</span> {quantity}
+          <span className="font-semibold">Quantity:</span> {quantity}
         </p>
         <p>
-          <span className="font-semibold">Taste :</span> {taste}
+          <span className="font-semibold">Taste:</span> {taste}
         </p>
       </div>
 
       {/* Action Buttons */}
       <div className="flex flex-col gap-2">
-        <button className="btn btn-sm bg-blue-900 rounded-full">
-          <EyeIcon size={16} />
-        </button>
         <Link
-          to={`/updateCoffee/${_id}`}
-          className="btn btn-sm bg-black-500 hover:bg-fuchsia-600 text-white rounded-full"
+          to={user ? `/showDetailCoffee/${_id}` : "/signup"}
+          title="View"
+          className="btn btn-sm bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-700 rounded-full transition"
         >
-          <Pencil size={16} />
+          <EyeIcon size={16} />
         </Link>
-        <button
-          onClick={() => handleDeleteCoffee(_id, coffee?.name)}
-          className="btn btn-sm bg-red-500 hover:bg-fuchsia-600 text-white rounded-full"
-        >
-          <Trash2 size={16} />
-        </button>
+
+        {user && user?.email && (
+          <>
+            <Link
+              to={`/updateCoffee/${_id}`}
+              title="Edit"
+              className="btn btn-sm bg-amber-600 hover:bg-amber-700 text-white dark:bg-amber-500 dark:hover:bg-amber-600 rounded-full transition"
+            >
+              <Pencil size={16} />
+            </Link>
+
+            <button
+              title="Delete"
+              onClick={() => handleDeleteCoffee(_id, name)}
+              className="btn btn-sm bg-red-600 hover:bg-red-700 text-white dark:bg-red-500 dark:hover:bg-red-600 rounded-full transition"
+            >
+              <Trash2 size={16} />
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

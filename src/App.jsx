@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
-import CoffeeCard from "./components/CoffeeCard";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -9,9 +9,10 @@ function App() {
       <header>
         <Header></Header>
       </header>
-      <main className="w-11/12 mx-auto py-5">
+      <main className="w-11/12 min-h-[calc(100vh-362px)] mx-auto py-5">
         <Outlet></Outlet>
       </main>
+      <Footer></Footer>
     </>
   );
 }

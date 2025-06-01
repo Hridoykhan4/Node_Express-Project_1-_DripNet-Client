@@ -1,9 +1,10 @@
 import { Mail, Lock, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuthValue from "../hooks/useAuthValue";
 
 const SignUp = () => {
   const { createNewUser, updateUserProfile } = useAuthValue();
+  const nav = useNavigate()
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -12,8 +13,7 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     createNewUser(email, password)
-      .then((res) => {
-        console.log(res.user);
+        .then((res) => {
 
         updateUserProfile(name)
           .then(() => {
@@ -32,6 +32,7 @@ const SignUp = () => {
                 console.log(data);
                 if (data.insertedId) {
                   alert("Successfully Added");
+                  nav('/')
                 }
               });
           })

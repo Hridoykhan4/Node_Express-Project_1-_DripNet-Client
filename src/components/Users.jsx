@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const Users = () => {
   const allUsers = useLoaderData();
-  const [users, setUsers] = useState(allUsers);
+  const [users, setUsers] = useState(allUsers || []);
   const handleDeleteUser = (userId) => {
     Swal.fire({
       title: "Are you sure?",
@@ -17,9 +17,12 @@ const Users = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/users/${userId}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `http://localhost:5000/users/${userId}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
