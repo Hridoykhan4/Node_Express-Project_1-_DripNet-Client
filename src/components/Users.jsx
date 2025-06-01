@@ -60,7 +60,7 @@ const Users = () => {
                 <th>{i + 1}</th>
                 <td>{user?.name}</td>
                 <td>{user?.email}</td>
-                <td>{user?.signUptime}</td>
+                <td>{user?.lastSignInTime}</td>
                 <td className="space-x-1">
                   <button className="btn">
                     <Pencil className="h-6 w-6"></Pencil>

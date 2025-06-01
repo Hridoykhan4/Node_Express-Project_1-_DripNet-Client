@@ -3,19 +3,33 @@ import { Mail, Lock, User } from "lucide-react";
 import useAuthValue from "../hooks/useAuthValue";
 
 const SignIn = () => {
-    const {signInUser} = useAuthValue()
+  const { signInUser } = useAuthValue();
   const handleSignIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    signInUser(email,password)
-        .then(res => {
-            console.log(res.user)
+    signInUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+        // Login Info
+        const lastSignInTime = res?.user?.metadata?.lastSignInTime;
+        const loginInfo = { email, lastSignInTime };
+        fetch(`http://localhost:5000/users`, {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(loginInfo),
         })
-        .catch(err => {
-            console.log(err)
-        })
-};
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("After update patch: ", data);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="pt-10 flex items-center justify-center px-4">
@@ -25,7 +39,6 @@ const SignIn = () => {
         </h2>
 
         <form onSubmit={handleSignIn} className="space-y-5">
-          
           {/* Email */}
           <div className="flex items-center border rounded-lg px-4 py-2 shadow-sm focus-within:ring-2 focus-within:ring-blue-400">
             <Mail className="w-5 h-5 text-gray-500" />

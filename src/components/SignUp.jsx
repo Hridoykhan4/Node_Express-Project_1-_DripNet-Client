@@ -5,32 +5,20 @@ import useAuthValue from "../hooks/useAuthValue";
 const SignUp = () => {
   const { createNewUser, updateUserProfile } = useAuthValue();
 
-  const date = new Date();
-
-  const day = date.toLocaleDateString("en-US", { weekday: "short" });
-
-  const month = date.toLocaleDateString("en-US", { month: "short" });
-
-  const dayOfMonth = date.getDate();
-
-  const currentTime = new Date().toLocaleTimeString();
-
-  const newYear = new Date().getFullYear();
-
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    const signUptime = `Date: ${day}, ${month} ${dayOfMonth}, ${newYear} ${currentTime}`;
     createNewUser(email, password)
       .then((res) => {
         console.log(res.user);
+
         updateUserProfile(name)
           .then(() => {
-            const newUser = { name, email, signUptime };
-
+            const lastSignInTime = res?.user?.metadata?.lastSignInTime;
+            const newUser = { name, email, lastSignInTime };
             // Save To the database
             fetch(`http://localhost:5000/users`, {
               method: "POST",
