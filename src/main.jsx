@@ -21,7 +21,8 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home></Home>,
-        loader: () => fetch(`http://localhost:5000/coffee`),
+        loader: () =>
+          fetch(`https://coffee-store-server-gamma-two.vercel.app/coffee`),
       },
       {
         path: "/addCoffee",
@@ -35,7 +36,9 @@ const router = createBrowserRouter([
         path: "/updateCoffee/:id",
         element: <UpdateCoffee></UpdateCoffee>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/coffee/${params.id}`),
+          fetch(
+            `https://coffee-store-server-gamma-two.vercel.app/coffee/${params.id}`
+          ),
       },
       {
         path: "/signin",
@@ -49,7 +52,9 @@ const router = createBrowserRouter([
         path: "/showDetailCoffee/:id",
         element: <ShowDetailCoffee></ShowDetailCoffee>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/coffee/${params.id}`),
+          fetch(
+            `https://coffee-store-server-gamma-two.vercel.app/coffee/${params.id}`
+          ),
       },
       {
         path: "/orders",
@@ -58,7 +63,8 @@ const router = createBrowserRouter([
             <Orders></Orders>
           </ProtectedRoute>
         ),
-        loader: () => fetch(`http://localhost:5000/orders`),
+        loader: () =>
+          fetch(`https://coffee-store-server-gamma-two.vercel.app/orders`),
       },
       {
         path: "/users",
@@ -67,7 +73,8 @@ const router = createBrowserRouter([
             <Users></Users>,
           </ProtectedRoute>
         ),
-        loader: () => fetch(`http://localhost:5000/users`),
+        loader: () =>
+          fetch(`https://coffee-store-server-gamma-two.vercel.app/users`),
       },
     ],
   },
