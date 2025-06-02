@@ -17,7 +17,7 @@ const Users = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/users/${userId}`, {
+        fetch(`https://coffee-store-server-gamma-two.vercel.app/users/${userId}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -78,7 +78,7 @@ const Users = () => {
         </table>
       </div>
     </div>
-  );
+  )
 };
 
 export default Users;

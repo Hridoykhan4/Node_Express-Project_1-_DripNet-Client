@@ -5,8 +5,7 @@ const ProtectedRoute = ({ children }) => {
   const { loading, user } = useAuthValue();
 
   const { pathname } = useLocation();
-    console.log(pathname)
-    
+
   if (loading) {
     return <h1>Hi</h1>;
   }

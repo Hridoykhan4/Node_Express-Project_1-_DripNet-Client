@@ -34,6 +34,16 @@ const Header = () => {
           Home
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            `${isActive && "text-primary font-bold"} `
+          }
+        >
+          About
+        </NavLink>
+      </li>
 
       {user ? (
         <>

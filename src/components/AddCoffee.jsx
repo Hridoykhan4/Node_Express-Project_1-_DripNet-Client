@@ -1,6 +1,8 @@
-  import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddCoffee = () => {
+  const nav = useNavigate();
   const handleAddCoffee = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,7 +25,7 @@ const AddCoffee = () => {
     };
 
     // Send Coffees data to the server
-    fetch("http://localhost:5000/coffee", {
+    fetch("https://coffee-store-server-gamma-two.vercel.app/coffee", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,8 +41,8 @@ const AddCoffee = () => {
             text: "Coffee Added Successfully",
             icon: "success",
             confirmButtonText: "Cool",
-
           });
+          nav("/");
         }
       });
   };

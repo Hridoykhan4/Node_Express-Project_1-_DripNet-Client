@@ -13,10 +13,13 @@ import AuthProvider from "./Providers/AuthProvider.jsx";
 import ShowDetailCoffee from "./components/ShowDetailCoffee.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import Orders from "./components/Orders.jsx";
+import About from "./components/About.jsx";
+import ErrorPage from "./components/ErrorPage.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
@@ -39,6 +42,10 @@ const router = createBrowserRouter([
           fetch(
             `https://coffee-store-server-gamma-two.vercel.app/coffee/${params.id}`
           ),
+      },
+      {
+        path: "/about",
+        element: <About></About>,
       },
       {
         path: "/signin",
