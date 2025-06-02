@@ -17,7 +17,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://coffee-store-server-gamma-two.vercel.app/coffee/${coffeeId}`, {
+        fetch(`http://localhost:5000/coffee/${coffeeId}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -39,6 +39,9 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   return (
     <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-xl shadow-md hover:shadow-lg transition-shadow p-5 flex flex-col md:flex-row items-center gap-6">
       {/* Image */}
+  
+
+
 
       <img
         src={photo}
@@ -60,7 +63,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-row sm:flex-col gap-2">
         <Link
           to={user ? `/showDetailCoffee/${_id}` : "/signup"}
           title="View"

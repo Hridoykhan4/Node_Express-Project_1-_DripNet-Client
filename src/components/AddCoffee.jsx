@@ -23,7 +23,7 @@ const AddCoffee = () => {
     };
 
     // Send Coffees data to the server
-    fetch("https://coffee-store-server-gamma-two.vercel.app/coffee", {
+    fetch("http://localhost:5000/coffee", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

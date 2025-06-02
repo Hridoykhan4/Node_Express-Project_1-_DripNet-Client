@@ -34,7 +34,7 @@ const UpdateCoffee = () => {
       details,
       photo,
     };
-    fetch(`https://coffee-store-server-gamma-two.vercel.app/coffee/${matchedCoffee?._id}`, {
+    fetch(`http://localhost:5000/coffee/${matchedCoffee?._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

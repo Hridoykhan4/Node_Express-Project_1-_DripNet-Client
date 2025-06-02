@@ -20,7 +20,7 @@ const SignUp = () => {
             const lastSignInTime = res?.user?.metadata?.lastSignInTime;
             const newUser = { name, email, lastSignInTime };
             // Save To the database
-            fetch(`https://coffee-store-server-gamma-two.vercel.app/users`, {
+            fetch(`http://localhost:5000/users`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
