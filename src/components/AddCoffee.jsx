@@ -25,7 +25,7 @@ const AddCoffee = () => {
     };
 
     // Send Coffees data to the server
-    fetch("https://coffee-store-server-gamma-two.vercel.app/coffee", {
+    fetch("http://localhost:5000/coffee", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,6 @@ const AddCoffee = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.insertedId) {
           Swal.fire({
             title: "Success",

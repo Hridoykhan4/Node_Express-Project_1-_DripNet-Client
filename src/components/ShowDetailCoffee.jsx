@@ -1,16 +1,19 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuthValue from "../hooks/useAuthValue";
+import useWindowScrollTop from "../hooks/useWindowScrollTop";
 
 const ShowDetailCoffee = () => {
   const coffee = useLoaderData() || {};
+  useWindowScrollTop()
   const navigate = useNavigate();
   const {user} =  useAuthValue()  
   const { name, quantity, supplier, taste, category, details, photo } = coffee;
 
   const handleOrder = (name, photo) => {
     const orderInfo = { name, photo , userName: user?.displayName, email: user?.email};
-    fetch(`https://coffee-store-server-gamma-two.vercel.app/orders`, {
+    fetch(`http://localhost:5000
+/orders`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

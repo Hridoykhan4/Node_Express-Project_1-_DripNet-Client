@@ -1,11 +1,12 @@
 import { Mail, Lock, User } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuthValue from "../hooks/useAuthValue";
+import useWindowScrollTop from "../hooks/useWindowScrollTop";
 
 const SignUp = () => {
   const { createNewUser, updateUserProfile } = useAuthValue();
   const nav = useNavigate()
-
+  useWindowScrollTop()
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -20,7 +21,8 @@ const SignUp = () => {
             const lastSignInTime = res?.user?.metadata?.lastSignInTime;
             const newUser = { name, email, lastSignInTime };
             // Save To the database
-            fetch(`https://coffee-store-server-gamma-two.vercel.app/users`, {
+            fetch(`http://localhost:5000
+/users`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -29,7 +31,6 @@ const SignUp = () => {
             })
               .then((res) => res.json())
               .then((data) => {
-                console.log(data);
                 if (data.insertedId) {
                   alert("Successfully Added");
                   nav('/')
@@ -46,7 +47,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="pt-10 flex items-center justify-center px-4">
+    <div className="pt-5 flex items-center justify-center px-4">
       <div className="w-full max-w-md border p-8 rounded-2xl shadow-lg">
         <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">
           Create Account

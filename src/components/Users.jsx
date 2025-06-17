@@ -1,11 +1,12 @@
 import { Pencil } from "lucide-react";
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Users = () => {
   const allUsers = useLoaderData();
   const [users, setUsers] = useState(allUsers || []);
+
   const handleDeleteUser = (userId) => {
     Swal.fire({
       title: "Are you sure?",
@@ -17,7 +18,8 @@ const Users = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://coffee-store-server-gamma-two.vercel.app/users/${userId}`, {
+        fetch(`http://localhost:5000
+/users/${userId}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -62,9 +64,9 @@ const Users = () => {
                 <td>{user?.email}</td>
                 <td>{user?.lastSignInTime}</td>
                 <td className="space-x-1">
-                  <button className="btn">
+                  <Link to={`/updateProfileName/${user?._id}`} className="btn">
                     <Pencil className="h-6 w-6"></Pencil>
-                  </button>
+                  </Link>
                   <button
                     className="btn"
                     onClick={() => handleDeleteUser(user?._id)}
@@ -78,7 +80,7 @@ const Users = () => {
         </table>
       </div>
     </div>
-  )
+  );
 };
 
 export default Users;

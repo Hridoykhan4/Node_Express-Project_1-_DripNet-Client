@@ -17,7 +17,8 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://coffee-store-server-gamma-two.vercel.app/coffee/${coffeeId}`, {
+        fetch(`http://localhost:5000
+/coffee/${coffeeId}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -65,7 +66,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       {/* Action Buttons */}
       <div className="flex flex-row sm:flex-col gap-2">
         <Link
-          to={user ? `/showDetailCoffee/${_id}` : "/signup"}
+          to={user ? `/showDetailCoffee/${_id}` : "/signin"}
           title="View"
           className="btn btn-sm bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-700 rounded-full transition"
         >

@@ -1,9 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Mail, Lock, User } from "lucide-react";
 import useAuthValue from "../hooks/useAuthValue";
+import useWindowScrollTop from "../hooks/useWindowScrollTop";
 
 const SignIn = () => {
   const { signInUser } = useAuthValue();
+  useWindowScrollTop();
   const nav = useNavigate();
   const { state } = useLocation();
   const handleSignIn = (e) => {
@@ -12,17 +14,20 @@ const SignIn = () => {
     const password = e.target.password.value;
     signInUser(email, password)
       .then((res) => {
-        console.log(res.user);
         // Login Info
         const lastSignInTime = res?.user?.metadata?.lastSignInTime;
         const loginInfo = { email, lastSignInTime };
-        fetch(`https://coffee-store-server-gamma-two.vercel.app/users`, {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(loginInfo),
-        })
+        fetch(
+          `http://localhost:5000
+/users`,
+          {
+            method: "PATCH",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(loginInfo),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log("After update patch: ", data);

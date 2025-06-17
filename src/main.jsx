@@ -15,6 +15,12 @@ import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import Orders from "./components/Orders.jsx";
 import About from "./components/About.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
+import UpdateProfileName from "./components/UpdateProfileName.jsx";
+
+/* 
+https://coffee-store-server-gamma-two.vercel.app
+*/
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,8 +30,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home></Home>,
-        loader: () =>
-          fetch(`https://coffee-store-server-gamma-two.vercel.app/coffee`),
+        loader: () => fetch(`http://localhost:5000/coffee`),
       },
       {
         path: "/addCoffee",
@@ -39,9 +44,7 @@ const router = createBrowserRouter([
         path: "/updateCoffee/:id",
         element: <UpdateCoffee></UpdateCoffee>,
         loader: ({ params }) =>
-          fetch(
-            `https://coffee-store-server-gamma-two.vercel.app/coffee/${params.id}`
-          ),
+          fetch(`http://localhost:5000/coffee/${params.id}`),
       },
       {
         path: "/about",
@@ -59,9 +62,7 @@ const router = createBrowserRouter([
         path: "/showDetailCoffee/:id",
         element: <ShowDetailCoffee></ShowDetailCoffee>,
         loader: ({ params }) =>
-          fetch(
-            `https://coffee-store-server-gamma-two.vercel.app/coffee/${params.id}`
-          ),
+          fetch(`http://localhost:5000/coffee/${params.id}`),
       },
       {
         path: "/orders",
@@ -70,18 +71,22 @@ const router = createBrowserRouter([
             <Orders></Orders>
           </ProtectedRoute>
         ),
-        loader: () =>
-          fetch(`https://coffee-store-server-gamma-two.vercel.app/orders`),
+        loader: () => fetch(`http://localhost:5000/orders`),
       },
       {
         path: "/users",
         element: (
           <ProtectedRoute>
-            <Users></Users>,
+            <Users></Users>
           </ProtectedRoute>
         ),
-        loader: () =>
-          fetch(`https://coffee-store-server-gamma-two.vercel.app/users`),
+        loader: () => fetch(`http://localhost:5000/users`),
+      },
+      {
+        path: "/updateProfileName/:id",
+        element: <UpdateProfileName></UpdateProfileName>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/users/${params.id}`),
       },
     ],
   },
