@@ -2,11 +2,12 @@ import { Mail, Lock, User } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuthValue from "../hooks/useAuthValue";
 import useWindowScrollTop from "../hooks/useWindowScrollTop";
+// import axios from "axios";
 
 const SignUp = () => {
   const { createNewUser, updateUserProfile } = useAuthValue();
-  const nav = useNavigate()
-  useWindowScrollTop()
+  const nav = useNavigate();
+  useWindowScrollTop();
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -14,15 +15,21 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     createNewUser(email, password)
-        .then((res) => {
-
+      .then((res) => {
         updateUserProfile(name)
           .then(() => {
             const lastSignInTime = res?.user?.metadata?.lastSignInTime;
             const newUser = { name, email, lastSignInTime };
+
+            // Using Axios
+            /* axios.post('http://localhost:5000/users', newUser)
+              .then(res => {
+                console.log(res.data)
+              }) */
+
             // Save To the database
-            fetch(`http://localhost:5000
-/users`, {
+            // Using Fetch
+            fetch(`http://localhost:5000/users`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -33,7 +40,7 @@ const SignUp = () => {
               .then((data) => {
                 if (data.insertedId) {
                   alert("Successfully Added");
-                  nav('/')
+                  nav("/");
                 }
               });
           })

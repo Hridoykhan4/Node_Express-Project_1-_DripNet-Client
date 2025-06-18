@@ -15,7 +15,7 @@ const Header = () => {
     setUser(null);
     logOutUser()
       .then(() => {
-        console.log("Sign Out Successful");
+        alert("Sign Out Successful");
       })
       .catch((err) => {
         console.log(err);

@@ -16,7 +16,10 @@ import Orders from "./components/Orders.jsx";
 import About from "./components/About.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import UpdateProfileName from "./components/UpdateProfileName.jsx";
-
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 /* 
 https://coffee-store-server-gamma-two.vercel.app
 */
@@ -92,10 +95,14 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />{" "}
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />{" "}
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>
 );

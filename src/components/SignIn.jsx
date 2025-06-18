@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Mail, Lock, User } from "lucide-react";
 import useAuthValue from "../hooks/useAuthValue";
 import useWindowScrollTop from "../hooks/useWindowScrollTop";
+import axios from "axios";
 
 const SignIn = () => {
   const { signInUser } = useAuthValue();
@@ -17,22 +18,23 @@ const SignIn = () => {
         // Login Info
         const lastSignInTime = res?.user?.metadata?.lastSignInTime;
         const loginInfo = { email, lastSignInTime };
-        fetch(
-          `http://localhost:5000
-/users`,
-          {
-            method: "PATCH",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(loginInfo),
-          }
-        )
+
+        axios.patch(`http://localhost:5000/users`, loginInfo).then(() => {
+          nav(state ? state : "/");
+        });
+
+        /*  fetch(`http://localhost:5000/users`, {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(loginInfo),
+        })
           .then((res) => res.json())
           .then((data) => {
             console.log("After update patch: ", data);
-            nav(state ? state : "/");
-          });
+          }); 
+          */
       })
       .catch((err) => {
         console.log(err);
